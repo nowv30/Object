@@ -9,7 +9,23 @@ public class TicketSeller {
 		this.ticketOffice = ticketOffice;
 	}
 	
-	public TicketOffice getTicketOffice() {
-		return ticketOffice;
+	
+//	1-1. 이 메소드를 제거함으로 TIcketSeller 이외에 다른 클래스에서 TicketOffice에 직접 접근할 수 없다.
+//	public TicketOffice getTicketOffice() {
+//		return ticketOffice;
+//	}
+	
+	//1-2. 기존에 Theater.enter(Audience audience)에 있던 로직을 가져왔다.
+	//이제 티켓판매원이 판매를 직접 관리한다.
+	public void sellTo(Audience audience) {
+		if(audience.getBag().hasInvitation()) {
+			Ticket ticket = ticketOffice.getTicket();
+			audience.getBag().setTicket(ticket);
+		}else {
+			Ticket ticket = ticketOffice.getTicket();
+			audience.getBag().minusAmount(ticket.getFee());
+			ticketOffice.plusAmount(ticket.getFee());
+			audience.getBag().setTicket(ticket);
+		}
 	}
 }

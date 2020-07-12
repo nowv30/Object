@@ -11,19 +11,12 @@ public class Theater {
 	public Theater(TicketSeller ticketSeller) {
 		this.ticketSeller=ticketSeller;
 	}
-//관객이 극장에 입장할 때 초대장의 유무를 확인한다.
-//초대장이 있으면 티켓판매원이 매표소에서 티켓을 꺼내고 관람객은 티켓을 받는다.
-//초대장이 없으면 티켓판매원이 티켓을 꺼내고 관람객은 가방에서 금액을 티켓가격만큼 지불한다.
-//판매원은 매표소에 티켓 가격만큼의 금액을 추가하고 관람객은 티켓을 받는다.
+	
+	/*
+	 * 2. 기존에 enter 아래 로직을 티켓판매원이 가져갔다.
+	 * 이제 가저간 로직을 호출하는 메소드만 간단하게 작성한다. 
+	 * */
 	public void enter(Audience audience) {
-		if(audience.getBag().hasInvitation()) {
-			Ticket ticket = ticketSeller.getTicketOffice().getTicket();
-			audience.getBag().setTicket(ticket);
-		}else {
-			Ticket ticket = ticketSeller.getTicketOffice().getTicket();
-			audience.getBag().minusAmount(ticket.getFee());
-			ticketSeller.getTicketOffice().plusAmount(ticket.getFee());
-			audience.getBag().setTicket(ticket);
-		}
+		ticketSeller.sellTo(audience);
 	}
 }

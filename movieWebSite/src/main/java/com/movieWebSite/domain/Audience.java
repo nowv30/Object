@@ -4,6 +4,7 @@ package com.movieWebSite.domain;
 public class Audience {
 	private Bag bag;
 	
+
 	public Bag getBag() {
 		return bag;
 	}
